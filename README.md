@@ -54,3 +54,77 @@ train_masks/labels-001.jpg
 
 程序会自动根据图像文件名查找对应的标签文件。若找不到对应掩膜，程序会报错。
 
+
+#3dsr （医疗插帧）
+## 1. 数据集结构
+/home/dell/wzh/new/InterpAny-Clearer-main/
+└── dataset/
+    ├── Meningioma-SEG-CLASS-001/
+    │   ├── sequences/
+    │   │   ├── case_001/
+    │   │   │   ├── im1.png
+    │   │   │   ├── im2.png
+    │   │   │   └── im3.png
+    │   │   │
+    │   │   ├── case_002/
+    │   │   │   ├── im1.png
+    │   │   │   ├── im2.png
+    │   │   │   └── im3.png
+    │   │   │
+    │   │   └── case_xxx/
+    │   │       ├── im1.png
+    │   │       ├── im2.png
+    │   │       └── im3.png
+    │   │
+    │   └── vimeo_triplet/
+    │       ├── tri_trainlist.txt
+    │       └── tri_testlist.txt
+    │
+    ├── Meningioma-SEG-CLASS-002/
+    │   ├── sequences/
+    │   │   ├── case_001/
+    │   │   │   ├── im1.png
+    │   │   │   ├── im2.png
+    │   │   │   └── im3.png
+    │   │   │
+    │   │   ├── case_002/
+    │   │   │   ├── im1.png
+    │   │   │   ├── im2.png
+    │   │   │   └── im3.png
+    │   │   │
+    │   │   └── case_xxx/
+    │   │       ├── im1.png
+    │   │       ├── im2.png
+    │   │       └── im3.png
+    │   │
+    │   └── vimeo_triplet/
+    │       ├── tri_trainlist.txt
+    │       └── tri_testlist.txt
+    │
+    └── Meningioma-SEG-CLASS-xxx/
+        ├── sequences/
+        │   ├── case_001/
+        │   │   ├── im1.png
+        │   │   ├── im2.png
+        │   │   └── im3.png
+        │   │
+        │   └── case_xxx/
+        │       ├── im1.png
+        │       ├── im2.png
+        │       └── im3.png
+        │
+        └── vimeo_triplet/
+            ├── tri_trainlist.txt
+            └── tri_testlist.txt
+##2.命令
+制作dis_index命令
+CUDA_VISIBLE_DEVICES=0,1 python multiprocess_create_dis_index.py --num_gpus 2 --num_workers 1 （--path /home/dell/wzh/new/InterpAny-Clearer-main/dataset/vimeo_triplet/ --sample_list_path tri_testlist.txt） --sample_length 3
+
+Test
+python inference_img.py --img0 /home/dell/wzh/InterpAny-Clearer-main/volume-11-283.jpg --img1 /home/dell/wzh/InterpAny-Clearer-main/volume-11-285.jpg --model RIFE --variant DR --checkpoint /home/dell/wzh/InterpAny-Clearer-main/checkpoints/RIFE/DR-RIFE --save_dir /home/dell/wzh/InterpAny-Clearer-main --num 1  --gif
+
+train
+CUDA_VISIBLE_DEVICES=0,1  python -m torch.distributed.launch --nproc_per_node=2 --master_port 29502 ./models/RIFE/train_sdi_m_mask.py --world_size 2 --batch_size 1 --exp_name EMA-VFI_sdi_m_triplet --use_sdi --triplet --data_path ./dataset/vimeo_triplet
+
+批量生成中间帧，并合成3d
+python batchruninter.py --root /home/dell/wzh/new/Meningioma_converted_preprocessed --model RIFE --variant DR --checkpoint /home/dell/wzh/new/InterpAny-Clearer-main/checkpoints/RIFE/DR-RIFE-pro --iters 2 --num 1
