@@ -54,7 +54,7 @@ train_masks/labels-001.jpg
 
 程序会自动根据图像文件名查找对应的标签文件。若找不到对应掩膜，程序会报错。
 
-## 3安装依赖
+## 3.安装依赖
 ```bash
 pip install -r requirements.txt
 ```
