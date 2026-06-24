@@ -57,6 +57,8 @@ train_masks/labels-001.jpg
 
 #3dsr （医疗插帧）
 ## 1. 数据集结构
+
+```text
 /home/dell/wzh/new/InterpAny-Clearer-main/
 └── dataset/
     ├── Meningioma-SEG-CLASS-001/
@@ -116,6 +118,8 @@ train_masks/labels-001.jpg
         └── vimeo_triplet/
             ├── tri_trainlist.txt
             └── tri_testlist.txt
+```
+
 ##2.命令
 制作dis_index命令
 CUDA_VISIBLE_DEVICES=0,1 python multiprocess_create_dis_index.py --num_gpus 2 --num_workers 1 （--path /home/dell/wzh/new/InterpAny-Clearer-main/dataset/vimeo_triplet/ --sample_list_path tri_testlist.txt） --sample_length 3
