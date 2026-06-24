@@ -54,6 +54,10 @@ train_masks/labels-001.jpg
 
 程序会自动根据图像文件名查找对应的标签文件。若找不到对应掩膜，程序会报错。
 
+## 3安装依赖
+```bash
+pip install -r requirements.txt
+```
 
 # 3dsr （医疗插帧）
 ## 1. 数据集结构
@@ -120,7 +124,12 @@ train_masks/labels-001.jpg
             └── tri_testlist.txt
 ```
 
-##2.命令
+## 2.安装依赖：
+```bash
+pip install -r requirements.txt
+```
+
+## 3.命令
 ```text
 制作dis_index命令
 CUDA_VISIBLE_DEVICES=0,1 python multiprocess_create_dis_index.py --num_gpus 2 --num_workers 1 （--path /home/dell/wzh/new/InterpAny-Clearer-main/dataset/vimeo_triplet/ --sample_list_path tri_testlist.txt） --sample_length 3
