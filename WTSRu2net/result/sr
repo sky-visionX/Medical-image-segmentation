@@ -1,0 +1,32 @@
+Average Dice on Test Dataset: 0.8939
+
+
+Global Dice (DG): 0.9269
+Average Dice (DG): 0.9010
+Average VOE: 0.1611
+Average RAVD: 0.1271
+
+
+
+
+u2net
+Global Dice (DG): 0.9381
+Average Dice (DG): 0.9216
+Average VOE: 0.1342
+Average RAVD: 0.0975
+
+
+256  bicubic
+-------- Final Evaluation Metrics --------
+Global Dice (DG): 0.9381
+Average Dice (DG): 0.9231
+Average VOE: 0.1339
+Average RAVD: 0.0958
+
+
+128  bicubic
+-------- Final Evaluation Metrics --------
+Global Dice (DG): 0.9234
+Average Dice (DG): 0.9101
+Average VOE: 0.1551
+Average RAVD: 0.1198

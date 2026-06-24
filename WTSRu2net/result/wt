@@ -1,0 +1,34 @@
+wtsr 256 wt 3channel
+Global Dice (DG): 0.9408
+Average Dice (DG): 0.9267
+Average VOE: 0.1284
+Average RAVD: 0.0865
+
+128  6channel linear
+
+Global Dice (DG): 0.9008
+Average Dice (DG): 0.8904
+Average VOE: 0.1882
+Average RAVD: 0.1488
+
+
+256 6channel linear
+Global Dice (DG): 0.9377
+Average Dice (DG): 0.9252
+Average VOE: 0.1317
+Average RAVD: 0.0956
+
+
+128 6channel bicubic
+Global Dice (DG): 0.9235
+Average Dice (DG): 0.9013
+Average VOE: 0.1628
+Average RAVD: 0.1278
+
+
+256 6channel bicubic wt
+Global Dice (DG): 0.93910.9391
+Average Dice (DG): 0.9147
+Average VOE: 0.1396
+Average RAVD: 0.0991
+
